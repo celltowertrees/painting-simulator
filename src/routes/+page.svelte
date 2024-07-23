@@ -1,6 +1,5 @@
 <script>
   import chroma from 'chroma-js';
-  import * as dat from 'dat.gui';
   import { onMount } from 'svelte';
 
   let initial = {
@@ -43,20 +42,6 @@
     shadows.ground,
     initial.background,
   ];
-
-  onMount(() => {
-		const gui = new dat.GUI();
-	
-    gui.addColor(initial, 'background').onChange((val) => {
-      initial.background = val;
-    });
-    gui.addColor(initial, 'ground').onChange((val) => {
-      initial.ground = val;
-    });
-    gui.addColor(initial, 'sphere').onChange((val) => {
-      initial.sphere = val;
-    });
-	});
 
 </script>
 
