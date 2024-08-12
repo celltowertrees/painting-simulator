@@ -1,6 +1,7 @@
 <script>
   import chroma from 'chroma-js';
-  import { onMount } from 'svelte';
+  import { getLight, getShadow } from '../lib/utils/mixers.js';
+  import Sphere from '../lib/components/sphere.svelte';
 
   let initial = {
     sphere: '#00ac73',
@@ -8,20 +9,7 @@
     ground: '#671f1f',
   }
 
-  function getLight(baseColor) {
-    // if ambient background is lighter than n
-    // return brightened color mixed with background
-    // else return brightened color
-    return chroma.mix(initial.background, baseColor, 0.85, 'lab').brighten();
-  }
-
-  function getShadow(baseColor) {
-    // if ambient background is darker than n
-    // return darkened color mixed with background
-    // else return darkened color
-
-    return chroma(baseColor).darken();
-  }
+  $: editMode = false;
 
   $: shadows = {
     sphere: chroma.mix(initial.ground, getShadow(initial.sphere), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
@@ -29,8 +17,8 @@
   }
 
   $: light = {
-    sphere: getLight(initial.sphere),
-    ground: getLight(initial.ground),
+    sphere: getLight(initial.background, initial.sphere),
+    ground: getLight(initial.background, initial.ground),
   }
 
   $: palette = [
@@ -50,18 +38,18 @@
 </svelte:head>
 
 <div class="background" style="--background: {initial.background};">
-    <div class="sphere" style="
-    --sphere-light: {light.sphere};
-    --sphere: {initial.sphere};
-    --sphere-shadow: {shadows.sphere};
-  "></div>
+
+  <Sphere
+    light={light.sphere}
+    shadows={shadows.sphere}
+    initial={initial.sphere}
+  />
 
   <div class="ground" style="
     --ground-light: {light.ground};
     --ground: {initial.ground};
     --ground-dark: {shadows.ground};
   ">
-    <div class="ground-shadow" style="--ground-shadow: {shadows.ground}"></div>
   </div>
 </div>
 
@@ -69,6 +57,15 @@
   {#each palette as color}
     <div class="color" style="background: {color};"></div>
   {/each}
+</div>
+
+<div class="controls">
+    <button on:click={() => editMode = !editMode}>Edit</button>
+    {#if editMode}
+        <input type="color" bind:value={initial.sphere} />
+        <input type="color" bind:value={initial.ground} />
+        <input type="color" bind:value={initial.background} />
+    {/if}
 </div>
 
 <style>
