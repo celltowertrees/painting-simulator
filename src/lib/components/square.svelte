@@ -19,8 +19,8 @@
 
 <style>
     .sphere {
-        height: 100px;
-        width: 100px;
+        height: 150px;
+        width: 150px;
         border-left: var(--light) 30px solid;
         border-top: var(--light) 30px solid;
         border-right: var(--shadow) 30px solid;
@@ -29,5 +29,6 @@
         background: linear-gradient(
             -230deg, var(--light) 0%, var(--base) 45%, var(--shadow) 100%
         );
+        rotate: 8deg;
     }
 </style>
