@@ -1,10 +1,10 @@
 import chroma from 'chroma-js';
 
-export function getLight(background, baseColor) {
+export function getLight(light, baseColor) {
 // if ambient background is lighter than n
 // return brightened color mixed with background
 // else return brightened color
-    return chroma.mix(background, baseColor, 0.85, 'lab').brighten();
+    return chroma.mix(light, baseColor, 0.85, 'lab').brighten();
 }
 
 export function getShadow(baseColor) {

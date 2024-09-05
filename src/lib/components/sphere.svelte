@@ -3,9 +3,11 @@
 
     export let light;
     export let base;
-    export let shadows;
+    export let shadow;
 
     $: palette = {
+        base: base,
+        shadow: shadow,
         // shadow: chroma.mix(initial.groundBase, getShadow(initial.sphereBase), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
         light: getLight(light, base)
     }
@@ -13,8 +15,8 @@
 
 <div class="sphere" style="
     --light: {palette.light};
-    --base: {base};
-    --shadow: {shadows};
+    --base: {palette.base};
+    --shadow: {palette.shadow};
 "></div>
 
 <style>

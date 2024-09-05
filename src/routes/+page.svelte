@@ -10,7 +10,7 @@
     groundBase: '#671f1f',
   }
 
-  $: skyBase = initial.skyBase
+  $: skyBase = chroma.mix(initial.sunlight, initial.skyBase);
 
   $: shadows = {
     sphere: chroma.mix(initial.groundBase, getShadow(initial.sphereBase), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
@@ -23,7 +23,7 @@
 
   $: palette = [
     initial.sunlight,
-    initial.skyBase,
+    skyBase,
     initial.sphereBase,
     shadows.sphere,
     light.ground,
@@ -43,7 +43,7 @@
       <div class="item-1">
         <Sphere
             light={initial.sunlight}
-            shadows={shadows.sphere}
+            shadow={shadows.sphere}
             base={initial.sphereBase}
         />
       </div>
@@ -63,10 +63,14 @@
 </div>
 
 <div class="control-panel">
-    <div class="controls">
+    <div class="basecolor-controls">
         <input type="color" bind:value={initial.sphereBase} />
         <input type="color" bind:value={initial.groundBase} />
-        <input type="color" bind:value={initial.sunlight} />
+        <input type="color" bind:value={initial.skyBase} />
+    </div>
+    <div class="sunlight-controls">
+        <!-- <input type="range" min="0" max="100" bind:value={initial.sunlight} /> -->
+         <input type="color" bind:value={initial.sunlight} />
     </div>
 </div>
 
@@ -109,8 +113,7 @@
 }
 
 .control-panel {
-  display: flex;
-  justify-content: space-between;
+
 }
 
 .palette {
