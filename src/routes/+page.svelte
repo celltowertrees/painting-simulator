@@ -4,29 +4,30 @@
   import Sphere from '../lib/components/sphere.svelte';
 
   let initial = {
-    sphere: '#00ac73',
-    background: '#c3e9ff', // this would affect the ambient light
-    ground: '#671f1f',
+    sunlight: '#ffdb00',
+    sphereBase: '#00ac73',
+    skyBase: '#c3e9ff',
+    groundBase: '#671f1f',
   }
 
-  $: editMode = false;
+  $: skyBase = initial.skyBase
 
   $: shadows = {
-    sphere: chroma.mix(initial.ground, getShadow(initial.sphere), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
-    ground: chroma.mix(initial.sphere, getShadow(initial.ground), 0.85, 'lab'), // account for reflection of sphere here
+    sphere: chroma.mix(initial.groundBase, getShadow(initial.sphereBase), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
+    ground: chroma.mix(initial.sphereBase, getShadow(initial.groundBase), 0.85, 'lab'), // account for reflection of sphere here
   }
 
   $: light = {
-    sphere: getLight(initial.background, initial.sphere),
-    ground: getLight(initial.background, initial.ground),
+    ground: getLight(initial.sunlight, initial.groundBase),
   }
 
   $: palette = [
-    light.sphere,
-    initial.sphere,
+    initial.sunlight,
+    initial.skyBase,
+    initial.sphereBase,
     shadows.sphere,
     light.ground,
-    initial.ground,
+    initial.groundBase,
     shadows.ground,
     initial.background,
   ];
@@ -37,87 +38,84 @@
   <title>PAINTING SIMULATOR</title>
 </svelte:head>
 
-<div class="background" style="--background: {initial.background};">
+<div class="screen">
+    <div class="background" style="--background: {skyBase};">
+      <div class="item-1">
+        <Sphere
+            light={initial.sunlight}
+            shadows={shadows.sphere}
+            base={initial.sphereBase}
+        />
+      </div>
 
-  <Sphere
-    light={light.sphere}
-    shadows={shadows.sphere}
-    initial={initial.sphere}
-  />
-
-  <div class="ground" style="
-    --ground-light: {light.ground};
-    --ground: {initial.ground};
-    --ground-dark: {shadows.ground};
-  ">
-  </div>
+      <div class="ground" style="
+        --light: {initial.sunlight};
+        --ground: {initial.groundBase};
+        --dark: {shadows.ground};
+      ">
+      </div>
+    </div>
+    <div class="palette">
+        {#each palette as color}
+          <div class="color" style="background: {color};"></div>
+        {/each}
+    </div>
 </div>
 
-<div class="palette">
-  {#each palette as color}
-    <div class="color" style="background: {color};"></div>
-  {/each}
-</div>
-
-<div class="controls">
-    <button on:click={() => editMode = !editMode}>Edit</button>
-    {#if editMode}
-        <input type="color" bind:value={initial.sphere} />
-        <input type="color" bind:value={initial.ground} />
-        <input type="color" bind:value={initial.background} />
-    {/if}
+<div class="control-panel">
+    <div class="controls">
+        <input type="color" bind:value={initial.sphereBase} />
+        <input type="color" bind:value={initial.groundBase} />
+        <input type="color" bind:value={initial.sunlight} />
+    </div>
 </div>
 
 <style>
+.screen {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .background {
   background-color: var(--background);
   position: relative;
   height: 70vh;
   width: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.item-1 {
+    position: absolute;
+    top: 12vh;
+    left: 40vw;
+    z-index: 2;
 }
 
 .ground {
   background: linear-gradient(
     -230deg,
-    var(--ground-light) 0%,
-    var(--ground) 35%,
-    var(--ground) 85%,
-    var(--ground-dark) 100%
+    var(--light) 0%,
+    var(--ground) 75%,
+    var(--ground) 95%,
+    var(--dark) 100%
   );
   /* background-color: var(--ground); */
   position: absolute;
   width: 100%;
   bottom: 0;
   height: 45vh;
-  z-index: 0;
+  z-index: -1;
 }
 
-.ground-shadow {
-  z-index: 1;
-  position: absolute;
-  top: 9vh;
-  left: 43vw;
-  width: 350px;
-  height: 50px;
-  border-radius: 100%;
-  background: linear-gradient(100deg, var(--ground-shadow) 0%, var(--ground) 100%), url('/svg/noise.svg');
-}
-.sphere {
-  z-index: 2;
-  position: absolute;
-  top: 12vh;
-  left: 40vw;
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  margin: 0 auto;
-  background: linear-gradient(
-    -230deg, var(--sphere-light) 0%, var(--sphere) 45%, var(--sphere-shadow) 100%
-  );
+.control-panel {
+  display: flex;
+  justify-content: space-between;
 }
 
 .palette {
   display: flex;
+  flex-direction: column;
 }
 
 .palette .color {

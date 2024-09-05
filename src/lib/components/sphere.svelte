@@ -1,27 +1,30 @@
 <script>
+    import { getLight } from '../../lib/utils/mixers.js';
+
     export let light;
-    export let initial;
+    export let base;
     export let shadows;
+
+    $: palette = {
+        // shadow: chroma.mix(initial.groundBase, getShadow(initial.sphereBase), 0.85, 'lab'), // account for reflection of ground here IF bg is brighter than object
+        light: getLight(light, base)
+    }
 </script>
 
 <div class="sphere" style="
-    --sphere-light: {light};
-    --sphere: {initial};
-    --sphere-shadow: {shadows};
+    --light: {palette.light};
+    --base: {base};
+    --shadow: {shadows};
 "></div>
 
 <style>
     .sphere {
-        z-index: 2;
-        position: absolute;
-        top: 12vh;
-        left: 40vw;
         height: 200px;
         width: 200px;
         border-radius: 50%;
         margin: 0 auto;
         background: linear-gradient(
-            -230deg, var(--sphere-light) 0%, var(--sphere) 45%, var(--sphere-shadow) 100%
+            -230deg, var(--light) 0%, var(--base) 45%, var(--shadow) 100%
         );
     }
 </style>
