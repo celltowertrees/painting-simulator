@@ -2,6 +2,7 @@
     import chroma from "chroma-js";
     import { getShadow } from "../lib/utils/mixers.js";
     import Sphere from "../lib/components/sphere.svelte";
+    import Square from "../lib/components/square.svelte";
 
     let initial = {
         sunlight: "#ffdb00",
@@ -31,7 +32,7 @@
         <Sphere light={initial.sunlight} base={initial.sphereBase} />
     </div>
     <div class="item-2">
-        <Sphere light={initial.sunlight} base={initial.sphereBase} />
+        <Square light={initial.sunlight} base={initial.sphereBase} />
     </div>
 </div>
 
