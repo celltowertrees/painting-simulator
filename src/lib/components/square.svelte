@@ -3,6 +3,7 @@
 
     export let light;
     export let base;
+    export let rotation = 0;
 
     $: palette = {
         base: base,
@@ -11,24 +12,30 @@
     }
 </script>
 
-<div class="sphere" style="
+<div class="square" style="
     --light: {palette.light};
     --base: {palette.base};
     --shadow: {palette.shadow};
+    --rotation: {rotation}deg;
+    --negative-rotation: -{rotation}deg;
+    --border-left: {rotation < 90 || rotation > 270 ? palette.light : palette.shadow};
+    --border-top: {rotation < 90 || rotation > 270 ? palette.light : palette.shadow};
+    --border-right: {rotation < 90 || rotation > 270 ? palette.shadow : palette.light};
+    --border-bottom: {rotation < 90 || rotation > 270 ? palette.shadow : palette.light};
 "></div>
 
 <style>
-    .sphere {
+    .square {
         height: 150px;
         width: 150px;
-        border-left: var(--light) 30px solid;
-        border-top: var(--light) 30px solid;
-        border-right: var(--shadow) 30px solid;
-        border-bottom: var(--shadow) 30px solid;
+        border-left: var(--border-left) 30px solid;
+        border-top: var(--border-top) 30px solid;
+        border-right: var(--border-right) 30px solid;
+        border-bottom: var(--border-bottom) 30px solid;
         margin: 0 auto;
         background: linear-gradient(
-            -230deg, var(--light) 0%, var(--base) 45%, var(--shadow) 100%
+            var(--negative-rotation), var(--light) 0%, var(--base) 45%, var(--shadow) 100%
         );
-        rotate: 8deg;
+        rotate: var(--rotation);
     }
 </style>

@@ -12,6 +12,12 @@
         groundBase: "#671f1f",
     };
 
+    let positioningConfig = {
+        square: {
+            rotation: 8,
+        },
+    }
+
     $: sky = initial.skyBase;
     $: ground = chroma(initial.groundBase).alpha(0.8);
 
@@ -30,21 +36,29 @@
                 <Sphere light={initial.sunlight} base={initial.sphereBase} />
             </div>
             <div class="item-2">
-                <Square light={initial.sunlight} base={initial.sphereBase} />
+                <Square light={initial.sunlight} base={initial.sphereBase} rotation={positioningConfig.square.rotation} />
             </div>
         </div>
     </div>
 
     <div class="control-panel">
+      <div>   
         <div class="basecolor-controls">
-            <input type="color" bind:value={initial.sphereBase} />
-            <!-- <input type="color" bind:value={initial.groundBase} />
-            <input type="color" bind:value={initial.skyBase} /> -->
+          <input type="color" bind:value={initial.sphereBase} />
+          <!-- <input type="color" bind:value={initial.groundBase} />
+          <input type="color" bind:value={initial.skyBase} /> -->
         </div>
         <div class="sunlight-controls">
-            <!-- <input type="range" min="0" max="100" bind:value={initial.sunlight} /> -->
-            <input type="color" bind:value={initial.sunlight} />
+          <!-- <input type="range" min="0" max="100" bind:value={initial.sunlight} /> -->
+          <input type="color" bind:value={initial.sunlight} />
         </div>
+        <div class="ground-controls">
+          <input type="color" bind:value={initial.groundBase} />
+        </div>
+      </div>
+      <div>
+        <input type="range" min="0" max="360" bind:value={positioningConfig.square.rotation} />
+      </div>
     </div>
 </div>
 
@@ -106,6 +120,11 @@
         grid-template-columns: 1fr 1fr;
         height: 100%;
         width: 100%;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
     }
 
     .item-1, .item-2 {
@@ -117,5 +136,7 @@
 
     .control-panel {
         margin: var(--gap);
+        gap: var(--gap);
+        display: flex;
     }
 </style>
