@@ -8,8 +8,9 @@
     let initial = {
         sunlight: "#ffdb00",
         sphereBase: "#00ac73",
+        squareBase: "#dd5a7b",
         skyBase: "#c3e9ff",
-        groundBase: "#671f1f",
+        groundBase: "#187EA0",
     };
 
     let positioningConfig = {
@@ -36,7 +37,7 @@
                 <Sphere light={initial.sunlight} base={initial.sphereBase} />
             </div>
             <div class="item-2">
-                <Square light={initial.sunlight} base={initial.sphereBase} rotation={positioningConfig.square.rotation} />
+                <Square light={initial.sunlight} base={initial.squareBase} rotation={positioningConfig.square.rotation} />
             </div>
         </div>
     </div>
@@ -45,11 +46,9 @@
       <div>   
         <div class="basecolor-controls">
           <input type="color" bind:value={initial.sphereBase} />
-          <!-- <input type="color" bind:value={initial.groundBase} />
-          <input type="color" bind:value={initial.skyBase} /> -->
+          <input type="color" bind:value={initial.squareBase} />
         </div>
         <div class="sunlight-controls">
-          <!-- <input type="range" min="0" max="100" bind:value={initial.sunlight} /> -->
           <input type="color" bind:value={initial.sunlight} />
         </div>
         <div class="ground-controls">

@@ -10,6 +10,7 @@
         shadow: getShadow(base),
         light: getLight(light, base)
     }
+
 </script>
 
 <div class="square" style="
@@ -18,10 +19,10 @@
     --shadow: {palette.shadow};
     --rotation: {rotation}deg;
     --negative-rotation: -{rotation}deg;
-    --border-left: {rotation < 90 || rotation > 270 ? palette.light : palette.shadow};
-    --border-top: {rotation < 90 || rotation > 270 ? palette.light : palette.shadow};
-    --border-right: {rotation < 90 || rotation > 270 ? palette.shadow : palette.light};
-    --border-bottom: {rotation < 90 || rotation > 270 ? palette.shadow : palette.light};
+    --border-left: {rotation < 40 || rotation > 270 ? palette.light : palette.shadow};
+    --border-top: {rotation < 40 || rotation > 270 ? palette.light : palette.shadow};
+    --border-right: {rotation < 40 || rotation > 270 ? palette.shadow : palette.light};
+    --border-bottom: {rotation < 40 || rotation > 270 ? palette.shadow : palette.light};
 "></div>
 
 <style>
@@ -37,5 +38,6 @@
             var(--negative-rotation), var(--light) 0%, var(--base) 45%, var(--shadow) 100%
         );
         rotate: var(--rotation);
+        transition: border 0.5s ease;
     }
 </style>
