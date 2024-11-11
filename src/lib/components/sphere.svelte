@@ -1,5 +1,5 @@
-<script>
-    import { getLight, getShadow } from '../../lib/utils/mixers.js';
+<script lang="ts">
+    import { getLight, getShadow } from '../utils/mixers';
 
     export let light;
     export let base;

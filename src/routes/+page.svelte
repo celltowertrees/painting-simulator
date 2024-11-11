@@ -1,11 +1,18 @@
-<script>
+<script lang="ts">
     import chroma from "chroma-js";
-    import soil from "$lib/img/soil.png";
-    import svg from "$lib/svg/noise.svg";
+    // import svg from "$lib/svg/noise.svg?component";
     import Sphere from "$lib/components/sphere.svelte";
     import Square from "$lib/components/square.svelte";
 
-    let initial = {
+    interface InitialColorsType {
+      sunlight: string,
+      sphereBase: string,
+      squareBase: string,
+      skyBase: string,
+      groundBase: string,
+    }
+
+    let initial: InitialColorsType = {
         sunlight: "#ffdb00",
         sphereBase: "#00ac73",
         squareBase: "#dd5a7b",
@@ -30,7 +37,7 @@
 
 <div class="container" style="--gap: 0.5rem">
     <div class="screen" style="--background: {sky}; --ground: {ground};">
-        <div class="texture" style="background-image: url({svg})"></div>
+        <!-- <div class="texture" style="background-image: url({svg})"></div> -->
         <div class="gradient"></div>
         <div class="grid">
             <div class="item-1">
@@ -98,13 +105,24 @@
         top: 0;
         left: 0;
         z-index: -1;
-        background: linear-gradient(
-            180deg,
-            var(--background) 0%,
-            var(--background) 48%,
-            var(--ground) 55%,
-            var(--ground) 100%
-        );
+        @media (min-aspect-ratio: 1 / 1) {
+            background: linear-gradient(
+                90deg,
+                var(--background) 0%,
+                var(--background) 25%,
+                var(--ground) 75%,
+                var(--ground) 100%
+            );
+        }
+        @media (max-aspect-ratio: 1 / 1) {
+          background: linear-gradient(
+              180deg,
+              var(--background) 0%,
+              var(--background) 25%,
+              var(--ground) 75%,
+              var(--ground) 100%
+          );
+      }
     }
 
     .screen {

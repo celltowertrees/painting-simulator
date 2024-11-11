@@ -1,5 +1,5 @@
-<script>
-    import { getLight, getShadow } from '../utils/mixers.js';
+<script lang="ts">
+    import { getLight, getShadow } from '../utils/mixers';
 
     export let light;
     export let base;
@@ -18,11 +18,11 @@
     --base: {palette.base};
     --shadow: {palette.shadow};
     --rotation: {rotation}deg;
-    --negative-rotation: -{rotation}deg;
-    --border-left: {rotation < 40 || rotation > 270 ? palette.light : palette.shadow};
-    --border-top: {rotation < 40 || rotation > 270 ? palette.light : palette.shadow};
-    --border-right: {rotation < 40 || rotation > 270 ? palette.shadow : palette.light};
-    --border-bottom: {rotation < 40 || rotation > 270 ? palette.shadow : palette.light};
+    --negative-rotation: -{rotation + 45}deg;
+    --border-left: {rotation < 45 || rotation > 225 ? palette.light : palette.shadow};
+    --border-top: {rotation < 45 || rotation > 225 ? palette.light : palette.shadow};
+    --border-right: {rotation < 45 || rotation > 225 ? palette.shadow : palette.light};
+    --border-bottom: {rotation < 45 || rotation > 225 ? palette.shadow : palette.light};
 "></div>
 
 <style>
@@ -35,9 +35,10 @@
         border-bottom: var(--border-bottom) 30px solid;
         margin: 0 auto;
         background: linear-gradient(
-            var(--negative-rotation), var(--light) 0%, var(--base) 45%, var(--shadow) 100%
+            var(--negative-rotation), var(--light) 0%, var(--shadow) 100%
         );
         rotate: var(--rotation);
         transition: border 0.5s ease;
+        mix-blend-mode: hard-light;
     }
 </style>
