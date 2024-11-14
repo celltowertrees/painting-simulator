@@ -4,27 +4,31 @@
     import Sphere from "$lib/components/sphere.svelte";
     import Square from "$lib/components/square.svelte";
 
-    interface InitialColorsType {
+    type Config = {
       sunlight: string,
-      sphereBase: string,
-      squareBase: string,
+      sphere: {
+        base: string,
+      },
+      square: {
+        base: string,
+        rotation: number,
+      },
       skyBase: string,
       groundBase: string,
     }
 
-    let initial: InitialColorsType = {
+    let initial: Config = {
         sunlight: "#ffdb00",
-        sphereBase: "#00ac73",
-        squareBase: "#dd5a7b",
+        sphere: {
+          base: "#00ac73",
+        },
+        square: {
+          base: "#dd5a7b",
+          rotation: 8,
+        },
         skyBase: "#c3e9ff",
         groundBase: "#187EA0",
     };
-
-    let positioningConfig = {
-        square: {
-            rotation: 8,
-        },
-    }
 
     $: sky = initial.skyBase;
     $: ground = chroma(initial.groundBase).alpha(0.8);
@@ -41,29 +45,33 @@
         <div class="gradient"></div>
         <div class="grid">
             <div class="item-1">
-                <Sphere light={initial.sunlight} base={initial.sphereBase} />
+                <Sphere light={initial.sunlight} base={initial.sphere.base} />
             </div>
             <div class="item-2">
-                <Square light={initial.sunlight} base={initial.squareBase} rotation={positioningConfig.square.rotation} />
+                <Square light={initial.sunlight} base={initial.square.base} rotation={initial.square.rotation} />
             </div>
         </div>
     </div>
 
     <div class="control-panel">
-      <div>   
-        <div class="basecolor-controls">
-          <input type="color" bind:value={initial.sphereBase} />
-          <input type="color" bind:value={initial.squareBase} />
-        </div>
+      <div class="general-controls">
         <div class="sunlight-controls">
+          <h5>sunlight</h5>
           <input type="color" bind:value={initial.sunlight} />
         </div>
         <div class="ground-controls">
+          <h5>ground</h5>
           <input type="color" bind:value={initial.groundBase} />
         </div>
       </div>
-      <div>
-        <input type="range" min="0" max="360" bind:value={positioningConfig.square.rotation} />
+      <div class="square-controls">
+        <h5>square</h5>
+        <input type="range" min="0" max="360" bind:value={initial.square.rotation} />
+        <input type="color" bind:value={initial.square.base} />
+      </div>
+      <div class="sphere-controls">
+        <h5>sphere</h5>
+        <input type="color" bind:value={initial.sphere.base} />
       </div>
     </div>
 </div>
@@ -152,8 +160,18 @@
     }
 
     .control-panel {
-        margin: var(--gap);
-        gap: var(--gap);
-        display: flex;
+      margin: var(--gap);
+      gap: var(--gap);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-panel h5 {
+      margin-bottom: 0.5rem;
+    }
+
+    .general-controls {
+      display: flex;
+      gap: var(--gap);
     }
 </style>
