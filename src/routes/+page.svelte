@@ -77,101 +77,101 @@
 </div>
 
 <style>
-    :global(body), :global(html), :global(*) {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+  :global(body), :global(html), :global(*) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    padding: var(--gap);
+  }
+
+  @media (min-aspect-ratio: 1 / 1) {
     .container {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        width: 100vw;
-        padding: var(--gap);
+      flex-direction: row;
     }
+  }
 
+  .texture {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+  }
+
+  .gradient {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
     @media (min-aspect-ratio: 1 / 1) {
-        .container {
-            flex-direction: row;
-        }
+      background: linear-gradient(
+        90deg,
+        var(--background) 0%,
+        var(--background) 25%,
+        var(--ground) 75%,
+        var(--ground) 100%
+      );
     }
-
-    .texture {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -2;
+    @media (max-aspect-ratio: 1 / 1) {
+      background: linear-gradient(
+        180deg,
+        var(--background) 0%,
+        var(--background) 25%,
+        var(--ground) 75%,
+        var(--ground) 100%
+      );
     }
+  }
 
-    .gradient {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        @media (min-aspect-ratio: 1 / 1) {
-            background: linear-gradient(
-                90deg,
-                var(--background) 0%,
-                var(--background) 25%,
-                var(--ground) 75%,
-                var(--ground) 100%
-            );
-        }
-        @media (max-aspect-ratio: 1 / 1) {
-          background: linear-gradient(
-              180deg,
-              var(--background) 0%,
-              var(--background) 25%,
-              var(--ground) 75%,
-              var(--ground) 100%
-          );
-      }
+  .screen {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
     }
+  }
 
-    .screen {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-    }
+  .item-1, .item-2 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        height: 100%;
-        width: 100%;
+  .control-panel {
+    margin: var(--gap);
+    gap: var(--gap);
+    display: flex;
+    flex-direction: column;
+  }
 
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-    }
+  .control-panel h5 {
+    margin-bottom: 0.5rem;
+  }
 
-    .item-1, .item-2 {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .control-panel {
-      margin: var(--gap);
-      gap: var(--gap);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .control-panel h5 {
-      margin-bottom: 0.5rem;
-    }
-
-    .general-controls {
-      display: flex;
-      gap: var(--gap);
-    }
+  .general-controls {
+    display: flex;
+    gap: var(--gap);
+  }
 </style>
