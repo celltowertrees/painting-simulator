@@ -1,14 +1,13 @@
 <script lang="ts">
     import { getLight, getShadow } from '../utils/mixers';
 
-    export let light;
-    export let base;
+    let { light, base } = $props();
 
-    $: palette = {
+    let palette = $derived({
         base: base,
         shadow: getShadow(base),
         light: getLight(light, base)
-    }
+    })
 </script>
 
 <div class="sphere" style="

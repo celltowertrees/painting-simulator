@@ -1,15 +1,19 @@
 <script lang="ts">
     import { getLight, getShadow } from '../utils/mixers';
 
-    export let light;
-    export let base;
-    export let rotation = 0;
+    interface Props {
+        light: any;
+        base: any;
+        rotation?: number;
+    }
 
-    $: palette = {
+    let { light, base, rotation = 0 }: Props = $props();
+
+    let palette = $derived({
         base: base,
         shadow: getShadow(base),
         light: getLight(light, base)
-    }
+    })
 
 </script>
 

@@ -17,7 +17,7 @@
       groundBase: string,
     }
 
-    let initial: Config = {
+    let initial: Config = $state({
         sunlight: "#ffdb00",
         sphere: {
           base: "#00ac73",
@@ -28,10 +28,10 @@
         },
         skyBase: "#c3e9ff",
         groundBase: "#187EA0",
-    };
+    });
 
-    $: sky = initial.skyBase;
-    $: ground = chroma(initial.groundBase).alpha(0.8);
+    let sky = $derived(initial.skyBase);
+    let ground = $derived(chroma(initial.groundBase).alpha(0.8));
 
 </script>
 
