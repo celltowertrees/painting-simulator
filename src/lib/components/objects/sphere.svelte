@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { getLight, getShadow } from '../utils/mixers';
-    import { type Component } from './component.types';
+    import { getLight, getShadow } from '$lib/utils/mixers';
+    import { type Component } from './object.types';
 
     let { light, base }: Component = $props();
 
