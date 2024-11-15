@@ -1,34 +1,9 @@
 <script lang="ts">
     import chroma from "chroma-js";
+    import initial from "$lib/store/config.svelte";
     // import svg from "$lib/svg/noise.svg?component";
-    import Sphere from "$lib/components/sphere.svelte";
-    import Square from "$lib/components/square.svelte";
-
-    type Config = {
-      sunlight: string,
-      sphere: {
-        base: string,
-      },
-      square: {
-        base: string,
-        rotation: number,
-      },
-      skyBase: string,
-      groundBase: string,
-    }
-
-    let initial: Config = $state({
-        sunlight: "#ffdb00",
-        sphere: {
-          base: "#00ac73",
-        },
-        square: {
-          base: "#dd5a7b",
-          rotation: 8,
-        },
-        skyBase: "#c3e9ff",
-        groundBase: "#187EA0",
-    });
+    import Sphere from "$lib/components/objects/sphere.svelte";
+    import Square from "$lib/components/objects/square.svelte";
 
     let sky = $derived(initial.skyBase);
     let ground = $derived(chroma(initial.groundBase).alpha(0.8));
@@ -45,10 +20,10 @@
         <div class="gradient"></div>
         <div class="grid">
             <div class="item-1">
-                <Sphere light={initial.sunlight} base={initial.sphere.base} />
+                <Sphere light={initial.sunlight} base={initial.sphere.base} name="sphere" />
             </div>
             <div class="item-2">
-                <Square light={initial.sunlight} base={initial.square.base} rotation={initial.square.rotation} />
+                <Square light={initial.sunlight} base={initial.square.base} rotation={initial.square.rotation} name="square" />
             </div>
         </div>
     </div>
