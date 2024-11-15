@@ -1,7 +1,8 @@
 <script lang="ts">
     import { getLight, getShadow } from '../utils/mixers';
+    import { type Component } from './component.types';
 
-    let { light, base } = $props();
+    let { light, base }: Component = $props();
 
     let palette = $derived({
         base: base,
