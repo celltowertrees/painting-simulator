@@ -31,6 +31,6 @@
         );
         rotate: var(--rotation);
         transition: border 0.5s ease;
-        mix-blend-mode: hard-light;
+        /* mix-blend-mode: hard-light; */
     }
 </style>

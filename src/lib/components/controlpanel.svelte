@@ -17,8 +17,8 @@
   </div>
   <div class="square-controls">
     <h5>square</h5>
-    <input type="range" min="0" max="360" bind:value={$initial.square.rotation} />
     <input type="color" bind:value={$initial.square.base} />
+    <input type="range" min="0" max="360" bind:value={$initial.square.rotation} />
   </div>
   <div class="sphere-controls">
     <h5>sphere</h5>

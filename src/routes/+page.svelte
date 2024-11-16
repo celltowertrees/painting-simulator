@@ -8,7 +8,8 @@
   import ControlPanel from "$lib/components/controlpanel.svelte";
 
   let bgPalette = $derived({
-    light: $initial.skyBase,
+    light: getLight($initial.sunlight, $initial.skyBase),
+    // light: $initial.skyBase,
     shadow: chroma($initial.groundBase).alpha(0.8)
   });
 
