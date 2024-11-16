@@ -1,20 +1,13 @@
 <script lang="ts">
-    import { getLight, getShadow } from '$lib/utils/mixers';
-    import { type Component } from './object.types';
+  import { initial } from '$lib/store/config.svelte';
+  import { type Component } from './object.types';
 
-    let { light, base, rotation = 0 }: Component = $props();
-
-    let palette = $derived({
-        base: base,
-        shadow: getShadow(base),
-        light: getLight(light, base)
-    })
-
+  let { base, rotation = 0, palette }: Component = $props();
 </script>
 
 <div class="square" style="
     --light: {palette.light};
-    --base: {palette.base};
+    --base: {$initial.square.base};
     --shadow: {palette.shadow};
     --rotation: {rotation}deg;
     --negative-rotation: -{rotation + 45}deg;
@@ -38,6 +31,6 @@
         );
         rotate: var(--rotation);
         transition: border 0.5s ease;
-        mix-blend-mode: hard-light;
+        /* mix-blend-mode: hard-light; */
     }
 </style>

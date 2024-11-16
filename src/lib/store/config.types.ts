@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 export type Config = {
   sunlight: string,
   sphere: {

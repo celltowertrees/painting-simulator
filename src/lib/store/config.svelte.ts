@@ -1,7 +1,8 @@
+import { writable } from 'svelte/store';
 import { type Config } from "./config.types";
 
-const initial: Config = $state({
-  sunlight: "#ffdb00",
+const initialPalette: Config = {
+  sunlight: "#ffe74d",
   sphere: {
     base: "#00ac73",
   },
@@ -11,6 +12,8 @@ const initial: Config = $state({
   },
   skyBase: "#c3e9ff",
   groundBase: "#187EA0",
-});
+};
 
-export default initial;
+const initial = writable(initialPalette);
+
+export { initial };
