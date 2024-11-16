@@ -1,6 +1,5 @@
 <script lang="ts">
   import chroma from "chroma-js";
-  import { setContext } from "svelte";
   import { initial } from "$lib/store/config.svelte";
   import { getLight, getShadow } from '$lib/utils/mixers';
   // import svg from "$lib/svg/noise.svg?component";
@@ -8,8 +7,15 @@
   import Square from "$lib/components/objects/square.svelte";
   import ControlPanel from "$lib/components/controlpanel.svelte";
 
-  let sky = $derived($initial.skyBase);
-  let ground = $derived(chroma($initial.groundBase).alpha(0.8));
+  let bgPalette = $derived({
+    light: $initial.skyBase,
+    shadow: chroma($initial.groundBase).alpha(0.8)
+  });
+
+  let spherePalette = $derived({
+    shadow: getShadow($initial.sphere.base),
+    light: getLight($initial.sunlight, $initial.sphere.base)
+  });
 
   let squarePalette = $derived({
     shadow: getShadow($initial.square.base),
@@ -22,12 +28,12 @@
 </svelte:head>
 
 <div class="container" style="--gap: 0.5rem">
-  <div class="screen" style="--background: {sky}; --ground: {ground};">
+  <div class="screen" style="--background: {bgPalette.light}; --ground: {bgPalette.shadow};">
     <!-- <div class="texture" style="background-image: url({svg})"></div> -->
     <div class="gradient"></div>
     <div class="grid">
       <div class="item-1">
-        <Sphere light={$initial.sunlight} base={$initial.sphere.base} name="sphere" />
+        <Sphere palette={spherePalette} name="sphere" />
       </div>
       <div class="item-2">
         <Square palette={squarePalette} rotation={$initial.square.rotation} name="square" />
@@ -35,7 +41,7 @@
     </div>
   </div>
 
-  <ControlPanel palettes={[squarePalette]} />
+  <ControlPanel palettes={[bgPalette, squarePalette, spherePalette]} />
 </div>
 
 <style>

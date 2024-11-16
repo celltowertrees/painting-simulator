@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { initial } from '$lib/store/config.svelte';
   import { type Component } from './object.types';
 
   let { base, rotation = 0, palette }: Component = $props();
@@ -6,7 +7,7 @@
 
 <div class="square" style="
     --light: {palette.light};
-    --base: {base};
+    --base: {$initial.square.base};
     --shadow: {palette.shadow};
     --rotation: {rotation}deg;
     --negative-rotation: -{rotation + 45}deg;

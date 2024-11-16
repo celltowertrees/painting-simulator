@@ -1,19 +1,14 @@
 <script lang="ts">
-    import { getLight, getShadow } from '$lib/utils/mixers';
+    import { initial } from '$lib/store/config.svelte';
     import { type Component } from './object.types';
 
-    let { light, base }: Component = $props();
+    let { palette }: Component = $props();
 
-    let palette = $derived({
-        base: base,
-        shadow: getShadow(base),
-        light: getLight(light, base)
-    })
 </script>
 
 <div class="sphere" style="
     --light: {palette.light};
-    --base: {palette.base};
+    --base: {$initial.sphere.base};
     --shadow: {palette.shadow};
 "></div>
 

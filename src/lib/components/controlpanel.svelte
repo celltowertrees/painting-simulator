@@ -24,6 +24,7 @@
     <h5>sphere</h5>
     <input type="color" bind:value={$initial.sphere.base} />
   </div>
+  <hr />
   <div class="palette">
     {#each palettes as palette}
       <div class="palette-item" style="--light: {palette.light}; --shadow: {palette.shadow};">
@@ -51,9 +52,16 @@
     gap: var(--gap);
   }
 
-  .palette {
+  hr {
     /* TODO use variable */
     margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
   }
 
   .palette-item {
