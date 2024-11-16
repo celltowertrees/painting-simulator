@@ -6,8 +6,8 @@
   import Square from "$lib/components/objects/square.svelte";
   import ControlPanel from "$lib/components/controlpanel.svelte";
 
-  let sky = $initial.skyBase;
-  let ground = $initial.ground;
+  let sky = $derived($initial.skyBase);
+  let ground = $derived(chroma($initial.groundBase).alpha(0.8));
 
 </script>
 
