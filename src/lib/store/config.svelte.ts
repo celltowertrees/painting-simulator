@@ -1,7 +1,6 @@
+import { getShadow, getLight } from "../utils/mixers";
 import { writable } from 'svelte/store';
-import chroma from 'chroma-js';
 import { type Config } from "./config.types";
-import { getLight, getShadow } from '$lib/utils/mixers';
 
 const initialPalette: Config = {
   sunlight: "#ffdb00",
@@ -11,6 +10,10 @@ const initialPalette: Config = {
   square: {
     base: "#dd5a7b",
     rotation: 8,
+    palette: {
+      // shadow: getShadow("#dd5a7b"),
+      // light: getLight("#ffdb00", "#dd5a7b"),
+    }
   },
   skyBase: "#c3e9ff",
   groundBase: "#187EA0",

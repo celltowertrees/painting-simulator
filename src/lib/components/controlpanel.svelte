@@ -1,5 +1,7 @@
 <script lang="ts">
   import { initial } from "$lib/store/config.svelte";
+
+  let { palettes }: { palettes: any[] } = $props();
 </script>
 
 <div class="control-panel">
@@ -22,6 +24,14 @@
     <h5>sphere</h5>
     <input type="color" bind:value={$initial.sphere.base} />
   </div>
+  <div class="palette">
+    {#each palettes as palette}
+      <div class="palette-item" style="--light: {palette.light}; --shadow: {palette.shadow};">
+        <div class="light"></div>
+        <div class="shadow"></div>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style>
@@ -39,5 +49,25 @@
   .general-controls {
     display: flex;
     gap: var(--gap);
+  }
+
+  .palette {
+    /* TODO use variable */
+    margin-top: 20px;
+  }
+
+  .palette-item {
+    display: flex;
+    gap: var(--gap);
+  }
+  .palette-item > div {
+    height: 50px;
+    width: 50px;
+  }
+  .light {
+    background-color: var(--light);
+  }
+  .shadow {
+    background-color: var(--shadow);
   }
 </style>

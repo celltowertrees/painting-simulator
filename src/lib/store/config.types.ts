@@ -8,6 +8,7 @@ export type Config = {
   square: {
     base: string,
     rotation: number,
+    palette: Record<string, chroma.Color>,
   },
   skyBase: string,
   groundBase: string,

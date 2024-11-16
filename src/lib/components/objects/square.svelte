@@ -1,20 +1,12 @@
 <script lang="ts">
-    import { getLight, getShadow } from '$lib/utils/mixers';
-    import { type Component } from './object.types';
+  import { type Component } from './object.types';
 
-    let { light, base, rotation = 0 }: Component = $props();
-
-    let palette = $derived({
-        base: base,
-        shadow: getShadow(base),
-        light: getLight(light, base)
-    })
-
+  let { base, rotation = 0, palette }: Component = $props();
 </script>
 
 <div class="square" style="
     --light: {palette.light};
-    --base: {palette.base};
+    --base: {base};
     --shadow: {palette.shadow};
     --rotation: {rotation}deg;
     --negative-rotation: -{rotation + 45}deg;
