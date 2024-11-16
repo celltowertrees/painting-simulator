@@ -1,54 +1,37 @@
 <script lang="ts">
-    import chroma from "chroma-js";
-    import initial from "$lib/store/config.svelte";
-    // import svg from "$lib/svg/noise.svg?component";
-    import Sphere from "$lib/components/objects/sphere.svelte";
-    import Square from "$lib/components/objects/square.svelte";
+  import chroma from "chroma-js";
+  import { setContext, getContext } from "svelte";
+  import { initial } from "$lib/store/config.svelte";
+  import { writable } from "svelte/store";
+  // import svg from "$lib/svg/noise.svg?component";
+  import Sphere from "$lib/components/objects/sphere.svelte";
+  import Square from "$lib/components/objects/square.svelte";
+  import ControlPanel from "$lib/components/controlpanel.svelte";
 
-    let sky = $derived(initial.skyBase);
-    let ground = $derived(chroma(initial.groundBase).alpha(0.8));
+  let sky = $derived($initial.skyBase);
+  let ground = $derived(chroma($initial.groundBase).alpha(0.8));
 
 </script>
 
 <svelte:head>
-    <title>PAINTING SIMULATOR</title>
+  <title>PAINTING SIMULATOR</title>
 </svelte:head>
 
 <div class="container" style="--gap: 0.5rem">
-    <div class="screen" style="--background: {sky}; --ground: {ground};">
-        <!-- <div class="texture" style="background-image: url({svg})"></div> -->
-        <div class="gradient"></div>
-        <div class="grid">
-            <div class="item-1">
-                <Sphere light={initial.sunlight} base={initial.sphere.base} name="sphere" />
-            </div>
-            <div class="item-2">
-                <Square light={initial.sunlight} base={initial.square.base} rotation={initial.square.rotation} name="square" />
-            </div>
-        </div>
+  <div class="screen" style="--background: {sky}; --ground: {ground};">
+    <!-- <div class="texture" style="background-image: url({svg})"></div> -->
+    <div class="gradient"></div>
+    <div class="grid">
+      <div class="item-1">
+        <Sphere light={$initial.sunlight} base={$initial.sphere.base} name="sphere" />
+      </div>
+      <div class="item-2">
+        <Square light={$initial.sunlight} base={$initial.square.base} rotation={$initial.square.rotation} name="square" />
+      </div>
     </div>
+  </div>
 
-    <div class="control-panel">
-      <div class="general-controls">
-        <div class="sunlight-controls">
-          <h5>sunlight</h5>
-          <input type="color" bind:value={initial.sunlight} />
-        </div>
-        <div class="ground-controls">
-          <h5>ground</h5>
-          <input type="color" bind:value={initial.groundBase} />
-        </div>
-      </div>
-      <div class="square-controls">
-        <h5>square</h5>
-        <input type="range" min="0" max="360" bind:value={initial.square.rotation} />
-        <input type="color" bind:value={initial.square.base} />
-      </div>
-      <div class="sphere-controls">
-        <h5>sphere</h5>
-        <input type="color" bind:value={initial.sphere.base} />
-      </div>
-    </div>
+  <ControlPanel />
 </div>
 
 <style>
@@ -132,21 +115,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .control-panel {
-    margin: var(--gap);
-    gap: var(--gap);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .control-panel h5 {
-    margin-bottom: 0.5rem;
-  }
-
-  .general-controls {
-    display: flex;
-    gap: var(--gap);
   }
 </style>
