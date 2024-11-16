@@ -1,15 +1,13 @@
 <script lang="ts">
   import chroma from "chroma-js";
-  import { setContext, getContext } from "svelte";
   import { initial } from "$lib/store/config.svelte";
-  import { writable } from "svelte/store";
   // import svg from "$lib/svg/noise.svg?component";
   import Sphere from "$lib/components/objects/sphere.svelte";
   import Square from "$lib/components/objects/square.svelte";
   import ControlPanel from "$lib/components/controlpanel.svelte";
 
-  let sky = $derived($initial.skyBase);
-  let ground = $derived(chroma($initial.groundBase).alpha(0.8));
+  let sky = $initial.skyBase;
+  let ground = $initial.ground;
 
 </script>
 
@@ -55,14 +53,14 @@
     }
   }
 
-  .texture {
+  /* .texture {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     z-index: -2;
-  }
+  } */
 
   .gradient {
     height: 100%;

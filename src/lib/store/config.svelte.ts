@@ -1,8 +1,9 @@
+import { writable } from 'svelte/store';
 import chroma from 'chroma-js';
 import { type Config } from "./config.types";
 import { getLight, getShadow } from '$lib/utils/mixers';
 
-const initialPalette: Config = $state({
+const initialPalette: Config = {
   sunlight: "#ffdb00",
   sphere: {
     base: "#00ac73",
@@ -19,6 +20,8 @@ const initialPalette: Config = $state({
   groundBase: "#187EA0",
   sky: "#c3e9ff",
   ground: chroma("#187EA0").alpha(0.8),
-});
+};
 
-export { initialPalette };
+const initial = writable(initialPalette);
+
+export { initial };
