@@ -6,6 +6,14 @@
   import Sphere from "$lib/components/objects/sphere.svelte";
   import Square from "$lib/components/objects/square.svelte";
   import ControlPanel from "$lib/components/controlpanel.svelte";
+  import { get } from "svelte/store";
+
+  const panelSurface = "#cdcdcd";
+
+  let panelBevels = $derived({
+    light: getLight($initial.sunlight, panelSurface),
+    shadow: getShadow(panelSurface)
+  });
 
   let bgPalette = $derived({
     light: getLight($initial.sunlight, $initial.skyBase),
@@ -28,7 +36,7 @@
   <title>PAINTING SIMULATOR</title>
 </svelte:head>
 
-<div class="container" style="--gap: 0.5rem">
+<div class="container" style="--gap: 0.5rem; --panel-surface: {panelSurface}; --bevel-light: {panelBevels.light}; --bevel-dark: {panelBevels.shadow}">
   <div class="screen" style="--background: {bgPalette.light}; --ground: {bgPalette.shadow};">
     <!-- <div class="texture" style="background-image: url({svg})"></div> -->
     <div class="gradient"></div>
@@ -58,6 +66,7 @@
     height: 100vh;
     width: 100vw;
     padding: var(--gap);
+    background-color: var(--panel-surface);
   }
 
   @media (min-aspect-ratio: 1 / 1) {
@@ -81,7 +90,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 1;
     @media (min-aspect-ratio: 1 / 1) {
       background: linear-gradient(
         90deg,
@@ -107,6 +116,10 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+    /* border-bottom: var(--bevel-light) 2px solid;
+    border-right: var(--bevel-light) 2px solid;
+    border-top: var(--bevel-dark) 2px solid;
+    border-left: var(--bevel-dark) 2px solid; */
   }
 
   .grid {

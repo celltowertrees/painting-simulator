@@ -13,13 +13,14 @@
 "></div>
 
 <style>
-    .sphere {
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
-        margin: 0 auto;
-        background: linear-gradient(
-            -230deg, var(--light) 0%, var(--base) 45%, var(--shadow) 100%
-        );
-    }
+  .sphere {
+    z-index: 1;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: linear-gradient(
+        -230deg, var(--light) 0%, var(--base) 45%, var(--shadow) 100%
+    );
+  }
 </style>
