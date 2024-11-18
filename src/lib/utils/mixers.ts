@@ -4,7 +4,7 @@ export function getLight(light: string, baseColor: string) {
 // if ambient background is lighter than n
 // return brightened color mixed with background
 // else return brightened color
-    return chroma.mix(light, baseColor, 0.5, 'lab').brighten();
+    return chroma.mix(light, baseColor, 0.8, 'lab').brighten();
 }
 
 export function getShadow(baseColor: string) {
