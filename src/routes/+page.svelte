@@ -31,6 +31,17 @@
     shadow: getShadow($initial.sunlight, $initial.square.base),
     light: getLight($initial.sunlight, $initial.square.base)
   });
+
+  let landscapePalette = $derived({
+    groundShadow: getShadow($initial.sunlight, $initial.groundBase),
+    groundLight: getLight($initial.sunlight, $initial.groundBase),
+    leavesShadow: getShadow($initial.sunlight, $initial.tree.leavesBase),
+    leavesLight: getLight($initial.sunlight, $initial.tree.leavesBase),
+    trunkShadow: getShadow($initial.sunlight, $initial.tree.trunkBase),
+    trunkLight: getLight($initial.sunlight, $initial.tree.trunkBase),
+    rockShadow: getShadow($initial.sunlight, $initial.rock.base),
+    rockLight: getLight($initial.sunlight, $initial.rock.base)
+  });
 </script>
 
 <svelte:head>
@@ -41,7 +52,7 @@
   <div class="screen" style="--background: {bgPalette.light}; --ground: {bgPalette.shadow};">
     <!-- <div class="texture" style="background-image: url({svg})"></div> -->
     <div class="gradient"></div>
-    <Landscape palette={spherePalette} />
+    <Landscape palette={landscapePalette} />
     <!-- <div class="grid">
       <div class="item-1">
         <Sphere palette={spherePalette} name="sphere" />
