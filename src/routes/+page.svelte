@@ -12,7 +12,7 @@
 
   let panelBevels = $derived({
     light: getLight($initial.sunlight, panelSurface),
-    shadow: getShadow(panelSurface)
+    shadow: getShadow($initial.sunlight, panelSurface)
   });
 
   let bgPalette = $derived({
@@ -22,12 +22,12 @@
   });
 
   let spherePalette = $derived({
-    shadow: getShadow($initial.sphere.base),
+    shadow: getShadow($initial.sunlight, $initial.sphere.base),
     light: getLight($initial.sunlight, $initial.sphere.base)
   });
 
   let squarePalette = $derived({
-    shadow: getShadow($initial.square.base),
+    shadow: getShadow($initial.sunlight, $initial.square.base),
     light: getLight($initial.sunlight, $initial.square.base)
   });
 </script>
@@ -91,7 +91,15 @@
     top: 0;
     left: 0;
     z-index: 1;
-    @media (min-aspect-ratio: 1 / 1) {
+    background: linear-gradient(0deg, #6ab9ff 0%, #4152be 100%);
+    /* background: linear-gradient(
+      0deg,
+      var(--background) 0%,
+      var(--background) 25%,
+      var(--ground) 75%,
+      var(--ground) 100%
+    ); */
+    /* @media (min-aspect-ratio: 1 / 1) {
       background: linear-gradient(
         90deg,
         var(--background) 0%,
@@ -108,7 +116,7 @@
         var(--ground) 75%,
         var(--ground) 100%
       );
-    }
+    } */
   }
 
   .screen {

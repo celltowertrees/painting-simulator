@@ -11,10 +11,10 @@
         <h5>sunlight</h5>
         <input type="color" bind:value={$initial.sunlight} />
       </div>
-      <div class="ground-controls">
+      <!-- <div class="ground-controls">
         <h5>ground</h5>
         <input type="color" bind:value={$initial.groundBase} />
-      </div>
+      </div> -->
     </div>
     <div class="square-controls">
       <h5>square</h5>
