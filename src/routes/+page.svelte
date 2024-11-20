@@ -5,6 +5,7 @@
   // import svg from "$lib/svg/noise.svg?component";
   import Sphere from "$lib/components/objects/sphere.svelte";
   import Square from "$lib/components/objects/square.svelte";
+  import Landscape from "$lib/components/landscape.svelte";
   import ControlPanel from "$lib/components/controlpanel.svelte";
   import { get } from "svelte/store";
 
@@ -40,14 +41,16 @@
   <div class="screen" style="--background: {bgPalette.light}; --ground: {bgPalette.shadow};">
     <!-- <div class="texture" style="background-image: url({svg})"></div> -->
     <div class="gradient"></div>
-    <div class="grid">
+    <Landscape palette={spherePalette} />
+    <!-- <div class="grid">
       <div class="item-1">
         <Sphere palette={spherePalette} name="sphere" />
       </div>
       <div class="item-2">
         <Square palette={squarePalette} rotation={$initial.square.rotation} name="square" />
       </div>
-    </div>
+    </div> -->
+
   </div>
 
   <ControlPanel palettes={[bgPalette, squarePalette, spherePalette]} />
