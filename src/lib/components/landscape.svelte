@@ -3,7 +3,7 @@
 </script>
 
 <div class="landscape" style="--groundShadow: {palette.groundShadow}; --groundLight: {palette.groundLight}; --leavesShadow: {palette.leavesShadow}; --leavesLight: {palette.leavesLight}; --trunkShadow: {palette.trunkShadow}; --trunkLight: {palette.trunkLight}; --rockShadow: {palette.rockShadow}; --rockLight: {palette.rockLight};">
-  <svg width="481" height="367" viewBox="0 0 481 367" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="481" height="367" preserveAspectRatio="xMidYMid slice" viewBox="0 0 481 367" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_1_2)">
     <path d="M189 225C212.5 225 342 219.5 411 225C439.441 227.267 463.795 232.109 482.5 237.16V367H0V235C55.1667 231.667 170.2 225 189 225Z" class="ground" />
     <path d="M401 268C389 271.6 373.333 272.833 367 273C380 268 390.7 254.6 383.5 241C376.3 227.4 359 225.667 380 223.5C392.833 224.167 422.5 226 438.5 228C454.5 230 473.167 235.167 480.5 237.5V257C474.167 258.167 457.5 261.2 441.5 264C421.5 267.5 416 263.5 401 268Z" class="ground-shadow" />

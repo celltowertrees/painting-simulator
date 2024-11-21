@@ -16,7 +16,7 @@
         <input type="color" bind:value={$initial.groundBase} />
       </div>
     </div>
-    <div class="square-controls">
+    <!-- <div class="square-controls">
       <h5>square</h5>
       <input type="color" bind:value={$initial.square.base} />
       <input type="range" min="0" max="360" bind:value={$initial.square.rotation} />
@@ -24,6 +24,23 @@
     <div class="sphere-controls">
       <h5>sphere</h5>
       <input type="color" bind:value={$initial.sphere.base} />
+    </div> -->
+    <div>
+      <h5>tree</h5>
+      <div class="tree-controls">
+        <div class="leaves-controls">
+          <h6>leaves</h6>
+          <input type="color" bind:value={$initial.tree.leavesBase} />
+        </div>
+        <div class="trunk-controls">
+          <h6>trunk</h6>
+          <input type="color" bind:value={$initial.tree.trunkBase} />
+        </div>
+      </div>
+      <h5>rock</h5>
+      <div class="rock-controls">
+        <input type="color" bind:value={$initial.rock.base} />
+      </div>
     </div>
   </div>
   <div class="palette">

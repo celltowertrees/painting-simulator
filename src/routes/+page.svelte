@@ -64,7 +64,7 @@
 
   </div>
 
-  <ControlPanel palettes={[bgPalette, squarePalette, spherePalette]} />
+  <ControlPanel palettes={[bgPalette, landscapePalette]} />
 </div>
 
 <style>
@@ -81,6 +81,7 @@
     width: 100vw;
     padding: var(--gap);
     background-color: var(--panel-surface);
+    overflow: hidden;
   }
 
   @media (min-aspect-ratio: 1 / 1) {
@@ -138,10 +139,10 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    /* border-bottom: var(--bevel-light) 2px solid;
+    border-bottom: var(--bevel-light) 2px solid;
     border-right: var(--bevel-light) 2px solid;
     border-top: var(--bevel-dark) 2px solid;
-    border-left: var(--bevel-dark) 2px solid; */
+    border-left: var(--bevel-dark) 2px solid;
   }
 
   .grid {
