@@ -11,4 +11,18 @@ export type Config = {
   },
   skyBase: string,
   groundBase: string,
+  tree: {
+    leavesBase: string,
+    trunkBase: string,
+  },
+  rock: {
+    base: string,
+  },
 };
+
+export type ColorPalette = {
+  [key: string]: {
+    light: chroma.Color,
+    shadow: chroma.Color,
+  },
+}
