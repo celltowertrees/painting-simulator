@@ -1,5 +1,12 @@
 import chroma from 'chroma-js';
 
+// export function Mixer(config) {
+//   this.config = config;
+//   return {
+
+//   }
+// }
+
 export function getLight(light: string, baseColor: string) {
   return chroma.mix(light, baseColor, 0.8, 'lab').brighten(0.1);
 }

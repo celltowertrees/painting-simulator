@@ -1,8 +1,10 @@
 <script lang="ts">
-  let { palette }: { palette: any } = $props();
+  import { type ColorPalette } from '$lib/store/config.types';
+
+  let { palette }: { palette: ColorPalette } = $props();
 </script>
 
-<div class="landscape" style="--groundShadow: {palette.groundShadow}; --groundLight: {palette.groundLight}; --leavesShadow: {palette.leavesShadow}; --leavesLight: {palette.leavesLight}; --trunkShadow: {palette.trunkShadow}; --trunkLight: {palette.trunkLight}; --rockShadow: {palette.rockShadow}; --rockLight: {palette.rockLight};">
+<div class="landscape" style="--groundShadow: {palette.ground.shadow}; --groundLight: {palette.ground.light}; --leavesShadow: {palette.leaves.shadow}; --leavesLight: {palette.leaves.light}; --trunkShadow: {palette.trunk.shadow}; --trunkLight: {palette.trunk.light}; --rockShadow: {palette.rock.shadow}; --rockLight: {palette.rock.light};">
   <svg width="481" height="367" preserveAspectRatio="xMidYMid slice" viewBox="0 0 481 367" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_1_2)">
     <path d="M189 225C212.5 225 342 219.5 411 225C439.441 227.267 463.795 232.109 482.5 237.16V367H0V235C55.1667 231.667 170.2 225 189 225Z" class="ground" />

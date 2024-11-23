@@ -19,3 +19,10 @@ export type Config = {
     base: string,
   },
 };
+
+export type ColorPalette = {
+  [key: string]: {
+    light: chroma.Color,
+    shadow: chroma.Color,
+  },
+}

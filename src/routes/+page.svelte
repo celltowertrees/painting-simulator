@@ -2,6 +2,7 @@
   import chroma from "chroma-js";
   import { initial } from "$lib/store/config.svelte";
   import { getLight, getShadow } from '$lib/utils/mixers';
+  import { type ColorPalette } from '$lib/store/config.types';
   // import svg from "$lib/svg/noise.svg?component";
   import Sphere from "$lib/components/objects/sphere.svelte";
   import Square from "$lib/components/objects/square.svelte";
@@ -16,31 +17,27 @@
     shadow: getShadow($initial.sunlight, panelSurface)
   });
 
-  let bgPalette = $derived({
-    light: getLight($initial.sunlight, $initial.skyBase),
-    // light: $initial.skyBase,
-    shadow: chroma($initial.groundBase).alpha(0.8)
-  });
-
-  let spherePalette = $derived({
-    shadow: getShadow($initial.sunlight, $initial.sphere.base),
-    light: getLight($initial.sunlight, $initial.sphere.base)
-  });
-
-  let squarePalette = $derived({
-    shadow: getShadow($initial.sunlight, $initial.square.base),
-    light: getLight($initial.sunlight, $initial.square.base)
-  });
-
-  let landscapePalette = $derived({
-    groundShadow: getShadow($initial.sunlight, $initial.groundBase),
-    groundLight: getLight($initial.sunlight, $initial.groundBase),
-    leavesShadow: getShadow($initial.sunlight, $initial.tree.leavesBase),
-    leavesLight: getLight($initial.sunlight, $initial.tree.leavesBase),
-    trunkShadow: getShadow($initial.sunlight, $initial.tree.trunkBase),
-    trunkLight: getLight($initial.sunlight, $initial.tree.trunkBase),
-    rockShadow: getShadow($initial.sunlight, $initial.rock.base),
-    rockLight: getLight($initial.sunlight, $initial.rock.base)
+  let palette: ColorPalette = $derived({
+    bg: {
+      light: getLight($initial.sunlight, $initial.skyBase),
+      shadow: chroma($initial.groundBase).alpha(0.8)
+    },
+    ground: {
+      light: getLight($initial.sunlight, $initial.groundBase),
+      shadow: getShadow($initial.sunlight, $initial.groundBase)
+    },
+    leaves: {
+      shadow: getShadow($initial.sunlight, $initial.tree.leavesBase),
+      light: getLight($initial.sunlight, $initial.tree.leavesBase),
+    },
+    trunk: {
+      shadow: getShadow($initial.sunlight, $initial.tree.trunkBase),
+      light: getLight($initial.sunlight, $initial.tree.trunkBase),
+    },
+    rock: {
+      shadow: getShadow($initial.sunlight, $initial.rock.base),
+      light: getLight($initial.sunlight, $initial.rock.base),
+    },
   });
 </script>
 
@@ -49,10 +46,10 @@
 </svelte:head>
 
 <div class="container" style="--gap: 0.5rem; --panel-surface: {panelSurface}; --bevel-light: {panelBevels.light}; --bevel-dark: {panelBevels.shadow}">
-  <div class="screen" style="--background: {bgPalette.light}; --ground: {bgPalette.shadow};">
+  <div class="screen" style="--background: {palette.bg.light}; --ground: {palette.bg.shadow};">
     <!-- <div class="texture" style="background-image: url({svg})"></div> -->
     <div class="gradient"></div>
-    <Landscape palette={landscapePalette} />
+    <Landscape palette={palette} />
     <!-- <div class="grid">
       <div class="item-1">
         <Sphere palette={spherePalette} name="sphere" />
@@ -64,7 +61,7 @@
 
   </div>
 
-  <ControlPanel palettes={[bgPalette, landscapePalette]} />
+  <ControlPanel palette={palette} />
 </div>
 
 <style>

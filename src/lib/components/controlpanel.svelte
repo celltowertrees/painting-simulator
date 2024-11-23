@@ -1,7 +1,7 @@
 <script lang="ts">
   import { initial } from "$lib/store/config.svelte";
 
-  let { palettes }: { palettes: any[] } = $props();
+  let { palette }: { palette: any } = $props();
 </script>
 
 <div class="control-panel">
@@ -44,8 +44,8 @@
     </div>
   </div>
   <div class="palette">
-    {#each palettes as palette}
-      <div class="palette-item" style="--light: {palette.light}; --shadow: {palette.shadow};">
+    {#each Object.keys(palette) as item}
+      <div class="palette-item" style="--light: {palette[item].light}; --shadow: {palette[item].shadow};">
         <div class="light"></div>
         <div class="shadow"></div>
       </div>
@@ -94,6 +94,11 @@
     border-right: var(--bevel-light) 1px solid;
     border-top: var(--bevel-dark) 1px solid;
     border-left: var(--bevel-dark) 1px solid; */
+  }
+
+  .tree-controls {
+    display: flex;
+    gap: var(--gap);
   }
   .light {
     background-color: var(--light);
