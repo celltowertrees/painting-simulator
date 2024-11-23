@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { type ColorPalette } from '$lib/store/config.types';
   import { initial } from "$lib/store/config.svelte";
 
-  let { palette }: { palette: any } = $props();
+  let { palette }: { palette: ColorPalette } = $props();
 </script>
 
 <div class="control-panel">
